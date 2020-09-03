@@ -17,7 +17,12 @@
                 </div>
                 <div class="panel-body">
                           <form action='/page' method='get'>
-                              <%- include('form_fields') %>
+                               <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="email" name="email"><br><br>
+                                    <input type="text" class="form-control" placeholder="password" name="password">
+                                    </div>
+                                  <br><br>
+                                <a href="/" class="btn btn-primary" >Login</a>                 
                         </div>
                     </form>
                     
