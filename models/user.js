@@ -5,8 +5,8 @@ var passportLocalMongoose = require('passport-local-mongoose');
 
 var User = new Schema({
     contact:{
-        type:Number,
-        default: false
+        type:String,
+        default: ''
     },
     admin:{
         type: Boolean,
@@ -14,7 +14,7 @@ var User = new Schema({
     },
     name: {
         type: String,
-        default: false
+        default: ''
     }
 });
 

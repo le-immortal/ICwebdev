@@ -9,17 +9,18 @@
 </head>
 <body>
   <div class="container">
-    <h1 class="mb-4">Events</h1>
+    <h1 class="">Events</h1>
     <% page.forEach(event => { %>
-        <div class="card mt-4">
+        <div class="card">
           <div class="card-body">
             <h4 class="card-title"><%= event.title %></h4>
-            <div class="card-subtitle text-muted mb-2">
-              <%= page.createdAt.toLocaleDateString() %>
+            <div class="card-subtitle text-muted">
+            
+            <div class="card-text "><%= event.description %></div>
             </div>
-            <div class="card-text mb-2"><%= event.description %></div>
-
-    </form>
+          </div>
+        </div>
+    <% }) %>
   </div>
 </body>
 </html>

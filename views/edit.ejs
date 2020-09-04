@@ -11,14 +11,14 @@
   <div class="container">
     <h1 class="mb-4">New Article</h1>
 
-    <form action="/articles" method="POST">
+    <form action="/edit" method="POST">
         <div class="form-group">
             <label for="title">Title</label>
-            <input required value="<%= event.title %>" type="text" name="title" id="title" class="form-control">
+            <input required value="" type="text" name="title" id="title" class="form-control">
           </div>
           <div class="form-group">
             <label for="description">Description</label>
-            <textarea name="description" id="description" class="form-control"><%= event.description %></textarea>
+            <textarea name="description" id="description" class="form-control"> </textarea>
           </div>        
           <a href="/" class="btn btn-secondary">Cancel</a>
           <button type="submit" class="btn btn-primary">Save</button>
