@@ -22,29 +22,6 @@ router.route('/')
         }
     })
 })
-.post(authenticate.verifyAdmin, (req, res, next)=>{
-    Event.create(req.body)
-    .then((event) => {
-        console.log('Event Created', event);
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(dish); 
-    },(err)=> next(err))
-    .catch((err)=> next(err));
-})
-.put(authenticate.verifyAdmin, (req,res,next) =>{
-    res.statusCode = 403;
-    res.end('Put operation is not supported');
-})
-.delete(authenticate.verifyAdmin, (req,res,next)=>{
-    Event.remove({})
-    .then((resp)=>{
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json(resp); 
-    },(err)=> next(err))
-    .catch((err)=> next(err));
-})
 
 
 module.exports = router;

@@ -24,6 +24,7 @@ connect.then((db) => {
 
 const app = express();
 
+
 app.set('view engine', 'ejs');
 app.use(bodyparser.urlencoded({ extended: true, useUnifiedTopology: true}));
 app.use(express.static("public"));
@@ -48,8 +49,7 @@ function auth (req, res, next) {
 
     if (!req.user) {
       var err = new Error('You are not authenticated!');
-      err.status = 403;
-      res.render('login');
+      res.redirect('/login');
       next(err);
     }
     else {
@@ -60,6 +60,8 @@ app.use(auth);
 
 app.use('/events', eventRouter);
 app.use('/edit', editRouter);
+
+
 app.listen(3000, ()=>{
-    console.log("Server Ready");
+  console.log("Server Ready");
 });

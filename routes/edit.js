@@ -13,23 +13,10 @@ router.route('/')
     Event.create(req.body)
     .then((event) => {
         console.log('Event Created', event);
-        res.statusCode = 200;
-        Event.find()
-        .then((event)=>{
-        page= [];
-        page =event;
-        console.log(page);
-        if(page.length > 0){
-          
-            res.render('event', page);
-          
-        }
-        else{
-            res.send("no data found");
-        }
-    })
-
-    },(err)=> next(event))
+        res.statusCode = 200;         
+        res.redirect('/events');
+        
+    },(err)=> next(err))
     .catch((err)=> next(err));
 })
 .put(authenticate.verifyAdmin, (req,res,next) =>{
@@ -40,25 +27,46 @@ router.route('/')
     Event.remove({})
     .then((resp)=>{
         res.statusCode = 200;
-        Event.find()
-        .then((event)=>{
-        page= [];
-        page =event;
-        console.log(page);
-        if(page.length > 0){
-          
-            res.render('event', page);
-          
-        }
-        else{
-            res.send("no data found");
-        }
-    })
+        res.redirect('events');
     },(err)=> next(err))
     .catch((err)=> next(err));
 })
 
 
+router.route('/:id')
+.get( (req,res,next)=>{
+    Event.findById(req.params.id)
+    .then((event) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(event); 
+    },(err)=> next(err))
+    .catch((err)=> next(err));
+})
+.post(authenticate.verifyAdmin, (req, res, next)=>{
+    res.statusCode = 403;
+    res.end('POST operation is not supported '+req.params.id);
+})
+.put(authenticate.verifyAdmin, (req,res,next) =>{
+    Event.findByIdAndUpdate(req.params.id, {
+        $set: req.body
+    },{new: true})
+    .then((event)=>{
+        res.statusCode = 200;
+        res.redirect('/events');
+        res.json(event);
+    },(err)=> next(err))
+    .catch((err)=> next(err));
+})
+.delete(authenticate.verifyAdmin, (req,res,next)=>{
+    Event.findByIdAndRemove(req.params.id)
+    .then((resp)=>{
+        res.statusCode = 200;
+        res.redirect('/events');
+        res.json(resp);
+    },(err)=> next(err))
+    .catch((err)=> next(err));
+})
 
 
 
